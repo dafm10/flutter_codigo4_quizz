@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fultter_codigo4_quiz/question_model.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -15,13 +16,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   List<Icon> scoreKeeper = [];
 
-  List<String> questions = [
-    'El hombre llegó a la luna?',
-    'La tierra es plana?',
-    'Ella te ama?',
+  List<Question> questions = [
+    Question(questionText: '¿El hombre llegó a la luna?', questionAnswer: true),
+    Question(questionText: '¿La Tierra es plana?', questionAnswer: false),
+    Question(questionText: '¿Ella te ama?', questionAnswer: false),
+    Question(questionText: '¿Desayunaste?', questionAnswer: true)
   ];
-
-  List<bool> answers = [true, false, false];
 
   int questionNumber = 0;
 
@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xff212121),
+        backgroundColor: const Color(0xff212121),
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
                 flex: 5,
                 child: Center(
                   child: Text(
-                    questions[questionNumber],
+                    questions[questionNumber].questionText,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: Colors.white,
@@ -53,9 +53,9 @@ class _MyAppState extends State<MyApp> {
                   padding: const EdgeInsets.all(10.0),
                   child: MaterialButton(
                     color: Colors.greenAccent,
-                    child: Text('Verdadero'),
+                    child: const Text('Verdadero'),
                     onPressed: () {
-                      bool correctAnswer = answers[questionNumber];
+                      bool correctAnswer = questions[questionNumber].questionAnswer;
                       if (correctAnswer == true) {
                         scoreKeeper.add(
                           const Icon(
@@ -84,9 +84,9 @@ class _MyAppState extends State<MyApp> {
                   padding: const EdgeInsets.all(10),
                   child: MaterialButton(
                     color: Colors.redAccent,
-                    child: Text('Falso'),
+                    child: const Text('Falso'),
                     onPressed: () {
-                      bool correctAnswer = answers[questionNumber];
+                      bool correctAnswer = questions[questionNumber].questionAnswer;
                       if (correctAnswer == false) {
                         scoreKeeper.add(
                           const Icon(
