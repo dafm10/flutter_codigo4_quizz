@@ -21,6 +21,8 @@ class _MyAppState extends State<MyApp> {
     'Ella te ama?',
   ];
 
+  List<bool> answers = [true, false, false];
+
   int questionNumber = 0;
 
   @override
@@ -53,16 +55,30 @@ class _MyAppState extends State<MyApp> {
                     color: Colors.greenAccent,
                     child: Text('Verdadero'),
                     onPressed: () {
+                      bool correctAnswer = answers[questionNumber];
+                      if (correctAnswer == true) {
+                        scoreKeeper.add(
+                          const Icon(
+                            Icons.check,
+                            color: Colors.greenAccent,
+                          ),
+                        );
+                      } else {
+                        scoreKeeper.add(
+                          const Icon(
+                            Icons.close,
+                            color: Colors.redAccent,
+                          ),
+                        );
+                      }
                       questionNumber++;
-                      scoreKeeper.add(Icon(Icons.check, color: Colors.greenAccent,),);
-                      setState(() {
-
-                      });
+                      setState(() {});
                     },
                   ),
                 ),
               ),
-              Expanded( // colocamos MaterialButton dentro para trabajar margenes
+              Expanded(
+                // colocamos MaterialButton dentro para trabajar margenes
                 flex: 1,
                 child: Padding(
                   padding: const EdgeInsets.all(10),
@@ -70,10 +86,24 @@ class _MyAppState extends State<MyApp> {
                     color: Colors.redAccent,
                     child: Text('Falso'),
                     onPressed: () {
+                      bool correctAnswer = answers[questionNumber];
+                      if (correctAnswer == false) {
+                        scoreKeeper.add(
+                          const Icon(
+                            Icons.check,
+                            color: Colors.greenAccent,
+                          ),
+                        );
+                      } else {
+                        scoreKeeper.add(
+                          const Icon(
+                            Icons.close,
+                            color: Colors.redAccent,
+                          ),
+                        );
+                      }
                       questionNumber++;
-                      setState(() {
-
-                      });
+                      setState(() {});
                     },
                   ),
                 ),
