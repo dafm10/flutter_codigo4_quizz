@@ -1,11 +1,27 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<Icon> scoreKeeper = [];
+
+  List<String> questions = [
+    'El hombre llegó a la luna?',
+    'La tierra es plana?',
+    'Ella te ama?',
+  ];
+
+  int questionNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +32,13 @@ class MyApp extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Expanded(
+              Expanded(
                 flex: 5,
                 child: Center(
                   child: Text(
-                    'Aquí va las preguntas!!!',
+                    questions[questionNumber],
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 24,
                     ),
@@ -37,6 +53,11 @@ class MyApp extends StatelessWidget {
                     color: Colors.greenAccent,
                     child: Text('Verdadero'),
                     onPressed: () {
+                      questionNumber++;
+                      scoreKeeper.add(Icon(Icons.check, color: Colors.greenAccent,),);
+                      setState(() {
+
+                      });
                     },
                   ),
                 ),
@@ -49,21 +70,16 @@ class MyApp extends StatelessWidget {
                     color: Colors.redAccent,
                     child: Text('Falso'),
                     onPressed: () {
+                      questionNumber++;
+                      setState(() {
+
+                      });
                     },
                   ),
                 ),
               ),
               Row(
-                children: const [
-                  Icon(Icons.check, color: Colors.greenAccent,),
-                  Icon(Icons.close, color: Colors.redAccent,),
-                  Icon(Icons.check, color: Colors.greenAccent,),
-                  Icon(Icons.close, color: Colors.redAccent,),
-                  Icon(Icons.check, color: Colors.greenAccent,),
-                  Icon(Icons.close, color: Colors.redAccent,),
-                  Icon(Icons.check, color: Colors.greenAccent,),
-                  Icon(Icons.close, color: Colors.redAccent,),
-                ],
+                children: scoreKeeper,
               ),
             ],
           ),
